@@ -8,7 +8,7 @@ var config = {
     username: 'slackbot-username',
     token: process.env.SLACK_INCOMING_TOKEN,
     channels: {
-        '#noisebridge': '#irc'
+        '#chef': '#freenode_irc'
     },
     users: {
     },
@@ -29,7 +29,7 @@ var server = http.createServer(function (req, res) {
         console.log('valid post from slack!');
         var ircMsg = payload.user_name + " says:" + payload.text.slice(4);
         console.log("attempt to post to irc: ", ircMsg);
-        slackbot.speak('#noisebridge', ircMsg);
+        slackbot.speak('#chef', ircMsg);
       }
     });
   } else {
