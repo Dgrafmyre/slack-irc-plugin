@@ -8,13 +8,13 @@ var config = {
     username: 'slackbot-username',
     token: process.env.SLACK_INCOMING_TOKEN,
     channels: {
-        '#chef': '#freenode_irc'
+        '#chef': '#irc'
     },
     users: {
     },
     // optionals
     floodProtection: true,
-    silent: false // keep the bot quiet
+    silent: true // keep the bot quiet
 };
 
 var slackbot = new slackbot.Bot(config);
@@ -27,7 +27,7 @@ var server = http.createServer(function (req, res) {
       var payload = querystring.parse(data.toString());
       if (payload.token == process.env.SLACK_OUTGOING_TOKEN) {
         console.log('valid post from slack!');
-        var ircMsg = payload.user_name + " says:" + payload.text.slice(4);
+        var ircMsg = payload.user_name + " says:" + payload.text;
         console.log("attempt to post to irc: ", ircMsg);
         slackbot.speak('#chef', ircMsg);
       }
